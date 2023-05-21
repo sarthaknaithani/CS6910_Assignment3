@@ -23,12 +23,12 @@
 3. Your run will be logged to wandb to my project "CS6910_Assignment3" and entity="cs22m078"
 4. You can view the logs that is the model training accuracy, validation accuracy, testing accuracy and respective losses
 
-# File Structre
+# File Structure
 A breif description of the list of files, and their respective purposes.
 1. `CS6910_Assignment3.py` - A class for handling data and all the data related methods
-2. `Utils.py` - A genaral set of versatile utility functions that is used in this assignment.
-3. `SequenceLearning.py` - This is the main file, containing the Encoder, Decoder, AttentionDecoder, and Seq2Seq model.
-4. `BestModels.ipynb` - This file takes care of perfoming the WandB Sweeps for hyper-paramter tuning, and training, testing the best models found in the WandB sweeps.
+2. `train.py` - A genaral set of versatile utility functions that is used in this assignment.
+3. `transliteration.py` - This is the main file, containing the Encoder, Decoder, AttentionDecoder, and Seq2Seq model.
+4. `transliteration.ipynb` - This file takes care of perfoming the WandB Sweeps for hyper-paramter tuning, and training, testing the best models found in the WandB sweeps.
 5. `train.py` - Code to implement the command line interface to interact with the repository
 
 # Classes in Sequence Learning
@@ -38,10 +38,10 @@ A breif description of the list of files, and their respective purposes.
     input_size : english_char_count
     embedding_size : size of each embedding vector
     hidden_size : size of hidden state vector
-    num_layers : number of recurrent layers of RNN
-    p : dropout probability
-    bi_dir : flag to set bidirection in the RNN cell used
-    rnn_class: type of RNN to be used in the encoder
+    num_encoder_layers : number of recurrent layers of RNN
+    dropout : dropout probability
+    bi_directional : flag to set bidirection in cell used
+    
 
     Input:
     ------
@@ -63,9 +63,9 @@ A breif description of the list of files, and their respective purposes.
     hidden_size: size of hidden state vector
     output_size: number of output features in fully connected layer, here target_char_count
     num_layers : number of recurrent layers of RNN
-    p : dropout probability
-    bi_dir : flag to set bidirection in the RNN cell used
-    rnn_class: type of RNN to be used in the encoder
+    dropout : dropout probability
+    bi_directional : flag to set bidirection in the RNN cell used
+    cell_type: type of RNN to be used in the encoder
 
     Input:
     -----
@@ -86,10 +86,10 @@ A breif description of the list of files, and their respective purposes.
     hidden_size: size of hidden state vector
     output_size: number of output features in fully connected layer, here target_char_count
     num_layers : number of recurrent layers of RNN
-    p : dropout probability
+    dropout : dropout probability
     max_length : maximum length of the input word (from encoder) for which this decoder is able to handle - by using attention mechanism
-    bi_dir : flag to set bidirection in the RNN cell used
-    rnn_class: type of RNN to be used in the encoder
+    bi_directional : flag to set bidirection in the RNN cell used
+    cell_type: type of RNN to be used in the encoder
 
     Input:
     -----
@@ -121,9 +121,3 @@ I did random teacher forcing by giving teacher ratio of 0.5
 
 # Command Line Interface
 Using `train.py` - For help related on how to use `train.py`, type `python train.py -h`  
-**Best Models**:  
-Configuration for the best model without using attention:  
-`python train.py --batch_size 128 --epochs 9 --learning_rate 0.001 --embedding_size 32 --encoder_layers 3 --decoder_layers 2 --enc_dropout 0.3 --dec_dropout 0.3 --hidden_size 256 --rnn_class LSTM --bi_directional`
-
-Configuration for the best model using attention:   
-`python train.py --batch_size 128 --epochs 16 --learning_rate 0.001 --embedding_size 128 --encoder_layers 3 --decoder_layers 2 --enc_dropout 0.2 --dec_dropout 0.2 --hidden_size 256 --rnn_class LSTM --bi_directional --attention`
