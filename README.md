@@ -2,7 +2,7 @@
 
 ## Author: SARTHAK NAITHANI
 
-### Link to the project report:
+### Link to the project report: https://api.wandb.ai/links/cs22m078/lz0u7fpz
 
 
 ## Required Libraries
