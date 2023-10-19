@@ -1,4 +1,4 @@
-# CS6910 Deep Learning Assignment 3
+# RNN based seq2seq model
 
 ## Author: SARTHAK NAITHANI
 
